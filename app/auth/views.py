@@ -11,8 +11,11 @@ from flask_login import current_user
 
 @auth.before_app_request
 def before_request():
-    if current_user.is_authenticated and not current_user.confirmed \
-    and request.blueprint != 'auth' and request.endpoint != 'static':
+    if current_user.is_authenticated:
+        current_user.ping()
+    # if current_user.is_anonymous:
+    #
+    if current_user.is_authenticated and (not current_user.is_anonymous and not current_user.confirmed) and request.endpoint and request.blueprint != 'auth' and request.endpoint != 'static':
         return redirect(url_for('auth.unconfirmed'))
 
 

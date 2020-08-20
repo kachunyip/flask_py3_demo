@@ -4,18 +4,20 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'  # set a secret key
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.qq.com')
+    MAIL_SERVER = os.environ.get('MAIL_SERVER', '')  # the email server 'smtp.qq.com'
     MAIL_PORT = int(os.environ.get('MAIL_PORT', '587'))
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'true').lower() in \
                    ['true', 'on', '1']
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME', '1955355216@qq.com')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', 'nrzkuwixhawdgfff')
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME', '') # use this email account to send message 'xxx@xxx.com'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', '')  # your email acount will get you a authentication code
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    # FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
-    FLASKY_MAIL_SENDER = 'Flasky Admin <1955355216@qq.com>'
-    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN', '553880615@qq.com')
+    FLASKY_MAIL_SENDER = ''  # 'name <xxx@xxx.com>'
+    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN', '')  # flasky set admin acount according to this setting 'xxx@xxx.com'
+    FLASKY_POSTS_PER_PAGE = os.environ.get('FLASKY_POSTS_PER_PAGE', 20)
+    FLASKY_FOLLOWERS_PER_PAGE = os.environ.get('FLASKY_FOLLOWERS_PER_PAGE', 20)
+    FLASKY_COMMENTS_PER_PAGE = os.environ.get('FLASKY_COMMENTS_PER_PAGE', 20)
 
     @staticmethod
     def init_app(app):
